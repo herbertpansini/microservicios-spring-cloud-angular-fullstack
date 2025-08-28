@@ -17,17 +17,20 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ExamenDto  implements Serializable {
+public class ExamenDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Long id;
 	
 	@NotEmpty
 	String nombre;
+	
 	Date createdAt;
 	
 	Set<PreguntaDto> preguntas = new HashSet<>();
 	
 	@NotNull
 	AsignaturaDto asignatura;
+	
+	Boolean respondido;
 }

@@ -28,6 +28,8 @@ public class RespuestaDto implements Serializable {
 	@NotNull
 	AlumnoDto alumno;
 	
+	Long alumnoId;
+	
 	@NotNull
 	PreguntaDto pregunta;
 }

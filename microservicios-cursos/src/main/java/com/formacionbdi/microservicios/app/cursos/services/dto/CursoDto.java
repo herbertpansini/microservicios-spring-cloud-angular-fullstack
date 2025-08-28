@@ -32,6 +32,7 @@ public class CursoDto implements Serializable {
 	Date createdAt;
 	Set<AlumnoDto> alumnos = new HashSet<>();
 	Set<ExamenDto> examenes = new HashSet<>();
+	Set<CursoAlumnoDto> cursosAlumnos = new HashSet<>();
 		
 	public void addAlumno(AlumnoDto alumno) {
 		this.alumnos.add(alumno);
@@ -47,5 +48,13 @@ public class CursoDto implements Serializable {
 	
 	public void removeExamen(ExamenDto examen) {
 		this.examenes.remove(examen);
+	}
+	
+	public void addCursoAlumno(CursoAlumnoDto cursoAlumno) {
+		this.cursosAlumnos.add(cursoAlumno);
+	}
+	
+	public void removeCursoAlumno(CursoAlumnoDto cursoAlumno) {
+		this.cursosAlumnos.remove(cursoAlumno);
 	}
 }

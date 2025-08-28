@@ -31,6 +31,7 @@
 		<org.projectlombok.version>1.18.38</org.projectlombok.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <lombok.mapstruct.binding>0.2.0</lombok.mapstruct.binding>
+        <flyway.version>10.0.0</flyway.version>
 		<spring-cloud.version>2025.0.0</spring-cloud.version>
 	</properties>
 	<dependencies>
@@ -70,7 +71,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -93,6 +93,16 @@
             <version>${org.mapstruct.version}</version>
         </dependency>
 		<dependency>
+		    <groupId>org.flywaydb</groupId>
+		    <artifactId>flyway-core</artifactId>
+		    <version>${flyway.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.flywaydb</groupId>
+        	<artifactId>flyway-mysql</artifactId>
+		    <version>${flyway.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -100,6 +110,10 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
 	</dependencies>
 

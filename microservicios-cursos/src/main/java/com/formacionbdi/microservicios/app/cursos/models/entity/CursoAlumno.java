@@ -1,6 +1,4 @@
-package com.formacionbdi.microservicios.commons.examenes.models.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.formacionbdi.microservicios.app.cursos.models.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,21 +16,20 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "preguntas")
+@Table(name = "cursos_alumnos")
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id", "texto"})
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class Pregunta {
+@EqualsAndHashCode(of = "alumnoId")
+@FieldDefaults(level=AccessLevel.PRIVATE)
+public class CursoAlumno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	
-	@Column(nullable = false)
-	String texto;
+	@Column(name = "alumno_id", nullable = false, unique = true)
+	Long alumnoId;
 	
-	@JsonIgnoreProperties(value = "preguntas")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "examen_id", nullable = false)
-	Examen examen;
+	@JoinColumn(name = "curso_id", nullable = false)
+	Curso curso;
 }

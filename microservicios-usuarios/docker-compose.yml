@@ -1,11 +1,12 @@
 version: '3.5'
 
 services:
-  my-microservicios-examenes:
-    container_name: my-microservicios-examenes
-    image: mysql:5.7.31
+  pg-microservicios-usuarios:
+    container_name: pg-microservicios-usuarios
+    image: postgres
     ports:
-      - "3306:3306"
+      - 5432:5432
     environment:
-      MYSQL_DATABASE: db_microservicios_examenes
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db_microservicios_usuarios

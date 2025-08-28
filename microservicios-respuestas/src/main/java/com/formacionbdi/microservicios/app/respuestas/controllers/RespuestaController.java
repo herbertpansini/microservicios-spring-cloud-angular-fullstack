@@ -1,6 +1,7 @@
 package com.formacionbdi.microservicios.app.respuestas.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,11 @@ public class RespuestaController {
 	
 	@PostMapping
 	public ResponseEntity<?> saveAll(@RequestBody List<RespuestaDto> respuestas) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(this.respuestaService.saveAll(respuestas));
+		return ResponseEntity.status(HttpStatus.CREATED).body(this.respuestaService.saveAll(respuestas.stream().map(r -> {
+						r.setAlumnoId(r.getAlumno().getId());
+						return r;
+					}).collect(Collectors.toList())
+				));
 	}
 	
 	@GetMapping("/alumno/{alumnoId}/examen/{examenId}")

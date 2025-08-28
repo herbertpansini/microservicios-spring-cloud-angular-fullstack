@@ -1,6 +1,7 @@
 package com.formacionbdi.microservicios.app.usuarios.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,11 @@ import lombok.experimental.FieldDefaults;
 @RequestMapping("/api/alumnos")
 @FieldDefaults(level=AccessLevel.PRIVATE)
 public class AlumnoController extends CommonController<AlumnoDto, AlumnoService> {
+	
+	@GetMapping("/alumnos-por-curso")
+	public ResponseEntity<?> obterAlumnosPorCurso(@RequestParam List<Long> ids) {
+		return ResponseEntity.ok(this.service.findAllById(ids));
+	}
 	
 	@GetMapping("/uploads/img/{id}")
 	public ResponseEntity<?> verFoto(@PathVariable long id) {

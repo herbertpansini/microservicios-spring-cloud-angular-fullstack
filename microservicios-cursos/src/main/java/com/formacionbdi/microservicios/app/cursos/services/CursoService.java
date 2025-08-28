@@ -13,9 +13,15 @@ public interface CursoService extends CommonService<CursoDto> {
 	
 	CursoDto eliminarAlumno(long id, AlumnoDto alumno);
 	
-	CursoDto findByAlumnosId(long alumnoId);
+	CursoDto findByAlumnoId(long alumnoId);
 	
 	CursoDto asignarExamenes(long id, List<ExamenDto> examenes);
 	
 	CursoDto eliminarExamen(long id, ExamenDto examen);
+	
+	List<Long> obtenerExamenesIdsConRespuestasPorAlumno(long alumnoId);
+	
+	List<AlumnoDto> obtenerAlumnosPorCurso(Iterable<Long> ids);
+	
+	void eliminarCursoAlumnoId(long alumnoId);
 }

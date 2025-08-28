@@ -2,7 +2,6 @@ package com.formacionbdi.microservicios.commons.services.impl;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,13 +47,13 @@ public class CommonServiceImpl<D, E, R extends JpaRepository<E, Long>, M extends
 
 	@Override
 	public D update(long id, D dto) {
-		D dtoUpdate = this.findById(id);
-		BeanUtils.copyProperties(dto, dtoUpdate, "id");
-		return this.save(dtoUpdate);
+		E entity = this.repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		this.mapper.toEntityFromDto(dto, entity);
+		return this.mapper.toDto(this.repository.save(entity));
 	}
 
 	@Override
 	public void deleteById(long id) {
 		this.repository.deleteById(id);
-	}	
+	}
 }
