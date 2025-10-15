@@ -3,7 +3,6 @@ package com.formacionbdi.microservicios.app.examenes.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,18 +17,16 @@ import com.formacionbdi.microservicios.commons.examenes.services.mapper.ExamenMa
 import com.formacionbdi.microservicios.commons.services.impl.CommonServiceImpl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ExamenServiceImpl extends CommonServiceImpl<ExamenDto, Examen, ExamenRepository, ExamenMapper> implements ExamenService {
-	
-	@Autowired
-	AsignaturaRepository asignaturaRepository;
-	
-	@Autowired
-	AsignaturaMapper asignaturaMapper;
+public class ExamenServiceImpl extends CommonServiceImpl<ExamenDto, Examen, ExamenRepository, ExamenMapper> implements ExamenService {	
+	final AsignaturaRepository asignaturaRepository;
+	final AsignaturaMapper asignaturaMapper;
 	
 	@Override
 	@Transactional(readOnly = true)

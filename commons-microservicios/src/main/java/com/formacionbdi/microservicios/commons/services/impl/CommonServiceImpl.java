@@ -17,8 +17,8 @@ import com.formacionbdi.microservicios.commons.mappers.services.mapper.EntityMap
 @FieldDefaults(level = AccessLevel.PROTECTED)
 public class CommonServiceImpl<D, E, R extends JpaRepository<E, Long>, M extends EntityMapper<D, E>> implements CommonService<D> {
 	@Autowired
-	R repository;
-	
+	R repository;	
+
 	@Autowired
 	M mapper;
 
@@ -34,10 +34,14 @@ public class CommonServiceImpl<D, E, R extends JpaRepository<E, Long>, M extends
 		return this.repository.findAll(pageable).map(this.mapper::toDto);
 	}
 
+	private E findByIdOrThrow(long id) {
+		return this.repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public D findById(long id) {
-		return this.mapper.toDto( this.repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)) );
+		return this.mapper.toDto( this.findByIdOrThrow(id) );
 	}
 
 	@Override
@@ -47,13 +51,13 @@ public class CommonServiceImpl<D, E, R extends JpaRepository<E, Long>, M extends
 
 	@Override
 	public D update(long id, D dto) {
-		E entity = this.repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		E entity = this.findByIdOrThrow(id);
 		this.mapper.toEntityFromDto(dto, entity);
 		return this.mapper.toDto(this.repository.save(entity));
 	}
 
 	@Override
 	public void deleteById(long id) {
-		this.repository.deleteById(id);
+		this.repository.delete( this.findByIdOrThrow(id) );
 	}
 }

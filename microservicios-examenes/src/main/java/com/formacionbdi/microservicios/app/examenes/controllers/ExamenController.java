@@ -17,6 +17,7 @@ import lombok.experimental.FieldDefaults;
 @RequestMapping("/api/examenes")
 @FieldDefaults(level=AccessLevel.PRIVATE)
 public class ExamenController extends CommonController<ExamenDto, ExamenService> {
+	
 	@GetMapping("/filtrar")
 	public ResponseEntity<?> filtrar(@RequestParam String term) {
 		return ResponseEntity.ok(this.service.findByNombreContainingIgnoreCase(term));

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,18 +20,17 @@ import com.formacionbdi.microservicios.commons.examenes.services.dto.ExamenDto;
 import com.formacionbdi.microservicios.commons.services.impl.CommonServiceImpl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CursoServiceImpl extends CommonServiceImpl<CursoDto, Curso, CursoRepository, CursoMapper> implements CursoService {
 
-	@Autowired
-	RespuestaFeignClient respuestaFeignClient;
-	
-	@Autowired
-	AlumnoFeignClient alumnoFeignClient;
+	final RespuestaFeignClient respuestaFeignClient;
+	final AlumnoFeignClient alumnoFeignClient;
 	
 	@Override
 	public CursoDto asignarAlumnos(long id, List<AlumnoDto> alumnos) {
@@ -74,13 +72,16 @@ public class CursoServiceImpl extends CommonServiceImpl<CursoDto, Curso, CursoRe
 		CursoDto cursoDto = this.mapper.toDto(this.repository.findByAlumnoId(alumnoId));
 		if (cursoDto != null) {
 			List<Long> examenesIds = this.respuestaFeignClient.obtenerExamenesIdsConRespuestasPorAlumno(alumnoId);
-			Set<ExamenDto> examenes = cursoDto.getExamenes().stream().map(examen -> {
-				if (examenesIds.contains(examen.getId())) {
-					examen.setRespondido(true);
-				}
-				return examen;
-			}).collect(Collectors.toSet());
-			cursoDto.setExamenes(examenes);
+			
+			if (examenesIds != null && !examenesIds.isEmpty()) {
+				Set<ExamenDto> examenes = cursoDto.getExamenes().stream().map(examen -> {
+					if (examenesIds.contains(examen.getId())) {
+						examen.setRespondido(true);
+					}
+					return examen;
+				}).collect(Collectors.toSet());
+				cursoDto.setExamenes(examenes);
+			}
 		}
 		return cursoDto;
 	}

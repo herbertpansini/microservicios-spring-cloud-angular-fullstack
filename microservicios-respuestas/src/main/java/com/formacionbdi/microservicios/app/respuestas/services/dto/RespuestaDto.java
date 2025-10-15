@@ -32,4 +32,6 @@ public class RespuestaDto implements Serializable {
 	
 	@NotNull
 	PreguntaDto pregunta;
+	
+	Long preguntaId;
 }

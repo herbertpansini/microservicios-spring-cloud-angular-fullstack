@@ -1,9 +1,7 @@
 package com.formacionbdi.microservicios.app.usuarios.services.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -18,26 +16,27 @@ import com.formacionbdi.microservicios.commons.alumnos.services.mapper.AlumnoMap
 import com.formacionbdi.microservicios.commons.services.impl.CommonServiceImpl;
 
 import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class AlumnoServiceImpl extends CommonServiceImpl<AlumnoDto, Alumno, AlumnoRepository, AlumnoMapper> implements AlumnoService {
 	
-	@Autowired
-	CursoFeignClient cursoFeignClient;
+	final CursoFeignClient cursoFeignClient;
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<AlumnoDto> findByNombreOrApellido(String term) {
-		return this.repository.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(term, term).stream().map(this.mapper::toDto).collect(Collectors.toList());
+		return this.mapper.toDto( this.repository.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(term, term) );
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<AlumnoDto> findAllById(Iterable<Long> ids) {
-		return this.repository.findAllById(ids).stream().map(this.mapper::toDto).collect(Collectors.toList());
+		return this.mapper.toDto( this.repository.findAllById(ids) );
 	}
 
 	@Override
