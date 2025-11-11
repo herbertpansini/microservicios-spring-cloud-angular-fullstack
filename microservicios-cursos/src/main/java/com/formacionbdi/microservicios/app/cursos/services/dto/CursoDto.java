@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.formacionbdi.microservicios.commons.alumnos.services.dto.AlumnoDto;
 import com.formacionbdi.microservicios.commons.examenes.services.dto.ExamenDto;
+import com.formacionbdi.microservicios.commons.mappers.services.dto.BaseDto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -20,7 +21,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level=AccessLevel.PRIVATE)
-public class CursoDto implements Serializable {
+public class CursoDto implements BaseDto, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	Long id;

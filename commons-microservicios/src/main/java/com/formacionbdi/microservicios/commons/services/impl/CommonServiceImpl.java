@@ -12,12 +12,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.formacionbdi.microservicios.commons.services.CommonService;
 import com.formacionbdi.microservicios.commons.mappers.services.mapper.EntityMapper;
+import com.formacionbdi.microservicios.commons.mappers.services.dto.BaseDto;
+import com.formacionbdi.microservicios.commons.mappers.models.entity.BaseEntity;
 
 @Transactional
 @FieldDefaults(level = AccessLevel.PROTECTED)
-public class CommonServiceImpl<D, E, R extends JpaRepository<E, Long>, M extends EntityMapper<D, E>> implements CommonService<D> {
+public class CommonServiceImpl<D extends BaseDto, E extends BaseEntity, R extends JpaRepository<E, Long>, M extends EntityMapper<D, E>> implements CommonService<D> {
 	@Autowired
-	R repository;	
+	R repository;
 
 	@Autowired
 	M mapper;
@@ -58,6 +60,6 @@ public class CommonServiceImpl<D, E, R extends JpaRepository<E, Long>, M extends
 
 	@Override
 	public void deleteById(long id) {
-		this.repository.delete( this.findByIdOrThrow(id) );
+		this.repository.deleteById(id);
 	}
 }

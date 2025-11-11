@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.formacionbdi.microservicios.commons.mappers.models.entity.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level=AccessLevel.PRIVATE)
-public class Alumno {
+public class Alumno implements BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;

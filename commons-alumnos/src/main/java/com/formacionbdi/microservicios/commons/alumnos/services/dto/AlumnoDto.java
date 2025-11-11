@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.formacionbdi.microservicios.commons.mappers.services.dto.BaseDto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level=AccessLevel.PRIVATE)
-public class AlumnoDto implements Serializable {
+public class AlumnoDto implements BaseDto, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	Long id;

@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.formacionbdi.microservicios.commons.alumnos.models.entity.Alumno;
 import com.formacionbdi.microservicios.commons.examenes.models.entity.Examen;
+import com.formacionbdi.microservicios.commons.mappers.models.entity.BaseEntity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,7 +37,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level=AccessLevel.PRIVATE)
-public class Curso {
+public class Curso implements BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;

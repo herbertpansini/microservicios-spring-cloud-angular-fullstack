@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 public class RespuestaDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	Long id;
+	String id;
 	
 	@NotEmpty
 	String texto;

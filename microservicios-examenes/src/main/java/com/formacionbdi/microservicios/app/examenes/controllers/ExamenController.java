@@ -1,5 +1,7 @@
 package com.formacionbdi.microservicios.app.examenes.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +28,10 @@ public class ExamenController extends CommonController<ExamenDto, ExamenService>
 	@GetMapping("/asignaturas")
 	public ResponseEntity<?> asignaturas() {
 		return ResponseEntity.ok(this.service.findAllAsignaturas());
+	}
+	
+	@GetMapping("/respondidos-por-preguntas")
+	public ResponseEntity<?> obtenerExamenesIdsPorPreguntasIdRespondidas(@RequestParam List<Long> preguntaIds) {
+		return ResponseEntity.ok(this.service.findExamenesIdsConRespuestasByPreguntaIds(preguntaIds));
 	}
 }

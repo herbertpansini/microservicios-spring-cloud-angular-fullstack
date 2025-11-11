@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.formacionbdi.microservicios.commons.mappers.services.dto.BaseDto;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -17,7 +19,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ExamenDto implements Serializable {
+public class ExamenDto implements BaseDto, Serializable {
 	private static final long serialVersionUID = 1L;
 
 	Long id;

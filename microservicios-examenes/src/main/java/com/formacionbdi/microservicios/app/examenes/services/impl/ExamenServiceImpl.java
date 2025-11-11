@@ -39,4 +39,10 @@ public class ExamenServiceImpl extends CommonServiceImpl<ExamenDto, Examen, Exam
 	public List<AsignaturaDto> findAllAsignaturas() {
 		return this.asignaturaRepository.findAll().stream().map(this.asignaturaMapper::toDto).collect(Collectors.toList());
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Long> findExamenesIdsConRespuestasByPreguntaIds(List<Long> preguntaIds) {
+		return this.repository.findExamenesIdsConRespuestasByPreguntaIds(preguntaIds);
+	}
 }

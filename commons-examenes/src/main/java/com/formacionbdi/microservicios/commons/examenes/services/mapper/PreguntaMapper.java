@@ -12,7 +12,12 @@ import com.formacionbdi.microservicios.commons.mappers.services.mapper.EntityMap
 public interface PreguntaMapper extends EntityMapper<PreguntaDto, Pregunta> {
 	@Override
     @Mapping(target = "examen", ignore = true)
+    @Mapping(source = "examenId", target = "examen.id")
     Pregunta toEntity(PreguntaDto preguntaDto);
+	
+	@Override    
+    @Mapping(source = "examen.id", target = "examenId")
+    PreguntaDto toDto(Pregunta pregunta);
 
     @Override
 	@Mapping(target = "id", ignore = true)

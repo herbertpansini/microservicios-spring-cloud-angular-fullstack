@@ -1,5 +1,7 @@
 package com.formacionbdi.microservicios.app.cursos.models.entity;
 
+import com.formacionbdi.microservicios.commons.mappers.models.entity.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,7 +23,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = "alumnoId")
 @FieldDefaults(level=AccessLevel.PRIVATE)
-public class CursoAlumno {
+public class CursoAlumno implements BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;

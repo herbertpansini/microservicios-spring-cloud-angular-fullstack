@@ -1,6 +1,7 @@
 package com.formacionbdi.microservicios.commons.examenes.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.formacionbdi.microservicios.commons.mappers.models.entity.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,7 +24,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(of = {"id", "texto"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Pregunta {
+public class Pregunta implements BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;

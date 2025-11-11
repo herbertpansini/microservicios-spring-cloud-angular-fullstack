@@ -10,4 +10,6 @@ public interface ExamenService extends CommonService<ExamenDto> {
 	List<ExamenDto> findByNombreContainingIgnoreCase(String nombre);
 	
 	List<AsignaturaDto> findAllAsignaturas();
+	
+	List<Long> findExamenesIdsConRespuestasByPreguntaIds(List<Long> preguntaIds);
 }
