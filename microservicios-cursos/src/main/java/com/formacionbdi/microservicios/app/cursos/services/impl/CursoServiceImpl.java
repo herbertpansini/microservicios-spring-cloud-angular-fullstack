@@ -35,11 +35,11 @@ public class CursoServiceImpl extends CommonServiceImpl<CursoDto, Curso, CursoRe
 	@Override
 	public CursoDto asignarAlumnos(long id, List<AlumnoDto> alumnos) {
 		CursoDto cursoDto = this.findById(id);
-		alumnos.forEach(a -> {
+		alumnos.forEach(a ->
 			cursoDto.addCursoAlumno(
 					CursoAlumnoDto.builder().alumnoId(a.getId()).cursoId(cursoDto.getId()).build()
-			);			
-		});
+			)			
+		);
 		return this.save(cursoDto);
 	}
 

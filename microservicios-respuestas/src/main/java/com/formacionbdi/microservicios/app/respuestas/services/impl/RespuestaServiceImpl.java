@@ -3,7 +3,6 @@ package com.formacionbdi.microservicios.app.respuestas.services.impl;
 //import java.util.Collections;
 import java.util.List;
 //import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -46,7 +45,10 @@ public class RespuestaServiceImpl implements RespuestaService {
 			return r;
 		}).collect(Collectors.toList());*/
 		
-		return this.respuestaRepository.findByAlumnoIdByExamenId(alumnoId, examenId).stream().map(this.respuestaMapper::toDto).collect(Collectors.toList());
+		return this.respuestaRepository.findByAlumnoIdByExamenId(alumnoId, examenId)
+				.stream()
+				.map(this.respuestaMapper::toDto)
+				.toList();
 	}
 
 	@Override
@@ -58,14 +60,18 @@ public class RespuestaServiceImpl implements RespuestaService {
 			examenIds = this.examenFeignClient.obtenerExamenesIdsPorPreguntasIdRespondidas(preguntaIds);
 		}
 		return examenIds;*/
-		return this.respuestaRepository.findExamenesIdsConRespuestasByAlumnoId(alumnoId).stream()
+		return this.respuestaRepository.findExamenesIdsConRespuestasByAlumnoId(alumnoId)
+				.stream()
 				.map(r -> r.getPregunta().getExamen().getId())
 				.distinct()
-				.collect(Collectors.toList());
+				.toList();
 	}
 
 	@Override
 	public List<RespuestaDto> findByAlumnoId(long alumnoId) {
-		return this.respuestaRepository.findByAlumnoId(alumnoId).stream().map(this.respuestaMapper::toDto).collect(Collectors.toList());
+		return this.respuestaRepository.findByAlumnoId(alumnoId)
+				.stream()
+				.map(this.respuestaMapper::toDto)
+				.toList();
 	}
 }

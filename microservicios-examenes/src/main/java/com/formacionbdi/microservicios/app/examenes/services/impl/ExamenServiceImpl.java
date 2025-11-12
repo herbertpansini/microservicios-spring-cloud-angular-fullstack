@@ -1,7 +1,6 @@
 package com.formacionbdi.microservicios.app.examenes.services.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,13 +30,19 @@ public class ExamenServiceImpl extends CommonServiceImpl<ExamenDto, Examen, Exam
 	@Override
 	@Transactional(readOnly = true)
 	public List<ExamenDto> findByNombreContainingIgnoreCase(String nombre) {
-		return this.repository.findByNombreContainingIgnoreCase(nombre).stream().map(this.mapper::toDto).collect(Collectors.toList());
+		return this.repository.findByNombreContainingIgnoreCase(nombre)
+				.stream()
+				.map(this.mapper::toDto)
+				.toList();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<AsignaturaDto> findAllAsignaturas() {
-		return this.asignaturaRepository.findAll().stream().map(this.asignaturaMapper::toDto).collect(Collectors.toList());
+		return this.asignaturaRepository.findAll()
+				.stream()
+				.map(this.asignaturaMapper::toDto)
+				.toList();
 	}
 
 	@Override

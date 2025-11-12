@@ -30,13 +30,16 @@ public class AlumnoServiceImpl extends CommonServiceImpl<AlumnoDto, Alumno, Alum
 	@Override
 	@Transactional(readOnly = true)
 	public List<AlumnoDto> findByNombreOrApellido(String term) {
-		return this.mapper.toDto( this.repository.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(term, term) );
+		return this.repository.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(term, term)
+				.stream()
+				.map(this.mapper::toDto)
+				.toList();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<AlumnoDto> findAllById(Iterable<Long> ids) {
-		return this.mapper.toDto( this.repository.findAllById(ids) );
+		return this.repository.findAllById(ids).stream().map(this.mapper::toDto).toList();
 	}
 
 	@Override
